@@ -1,0 +1,27 @@
+function btnGo::Click()
+{
+   var sUrl = txtAddress.Text;
+   webBrowser.Navigate( sUrl );
+}
+
+function webBrowser::NavigateError(pDisp, sUrl, pFrame, bCancel)
+{
+  ScriptHost.Display("Failed to navigate: " + sUrl );
+  ScriptHost.QuitApp();
+}
+
+function webBrowser::NavigateComplete2(pDisp, sUrl)
+{
+  ScriptHost.Display("Viewing: " + sUrl );
+}
+
+function ScriptHost::OnRun()
+{
+  Display("Started...");
+}
+
+function ScriptHost::OnAppExit()
+{
+  Display("Exiting...");
+}
+

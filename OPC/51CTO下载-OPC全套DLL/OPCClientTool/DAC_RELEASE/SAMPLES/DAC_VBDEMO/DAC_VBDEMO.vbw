@@ -1,0 +1,10 @@
+Module1 = 22, 22, 835, 656, C
+frmMain = 66, 66, 990, 657, , 66, 66, 879, 700, C
+frmAbout = 0, 0, 0, 0, C, 220, 220, 975, 854, C
+DACLTSDK = 44, 44, 857, 678, Z
+frmServerBrowser = 242, 242, 1108, 833, C, 110, 110, 865, 744, C
+frmItemBrowser = 0, 0, 0, 0, C, 110, 110, 923, 744, C
+frmItemWrite = 0, 0, 0, 0, C, 198, 198, 953, 832, C
+frmServerStatus = 0, 0, 0, 0, C, 44, 44, 742, 678, C
+frmGroupStatus = 0, 0, 0, 0, C, 88, 88, 786, 722, C
+frmItemStatus = 0, 0, 0, 0, C, 132, 132, 830, 766, C

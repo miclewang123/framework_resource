@@ -1,0 +1,835 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0067)http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>EtherDream's Blog</title>
+<link type="text/css" rel="stylesheet" href="./EtherDream&#39;s Blog_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./EtherDream&#39;s Blog_files/bundle-SimpleBlue.css">
+<link type="text/css" rel="stylesheet" href="./EtherDream&#39;s Blog_files/83633.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/index-html/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/index-html/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/index-html/wlwmanifest.xml">
+<script type="text/javascript" src="./EtherDream&#39;s Blog_files/encoder.js"></script><script src="./EtherDream&#39;s Blog_files/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'index-html', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./EtherDream&#39;s Blog_files/blog-common.js" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+<div id="page_begin_html"></div><script>load_page_begin_html();</script>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/index-html/">EtherDream の 原创空间</a></div>
+<div class="subtitle"><img style="display:none" src="" onerror="console.log(1)"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/index-html/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/EtherDream">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/index-html/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/index-html/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			
+<!--done-->
+随笔-91&nbsp;
+文章-0&nbsp;
+评论-1446&nbsp;
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html">把C++当脚本语言写！</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p>　　提到脚本，脑海里马上闪过一大堆：Python，Perl，Ruby，PHP，JS，VBS，LUA。。。 不过你有没听说过，用经典的C++做脚本语言吗？先不多说，上个图。（先别纠结那个function，那仅仅是个宏而已，待会你就明白了）</p>
+<p>　　</p>
+<p>　　<img src="./EtherDream&#39;s Blog_files/28194902-8afbdfda1ef1498f8974a056cdbaf547.png" alt=""></p>
+<p>　　</p>
+<p>　　或许你在想这一定是疯了，用世界上最复杂的语言做脚本，写的人累不说，脚本引擎先累坏了。各种复杂的模板库，要边解释边运行，得有多强大的虚拟机才撑得住。</p>
+<p>　　好吧，那么我们退一步，不强求解释执行，回归到原始的编译后执行。———— 不过那还算脚本吗？</p>
+<p>　　</p>
+<h1>编译速度</h1>
+<p>　　事实上如今高性能的脚本都是先编译后运行的，大名鼎鼎的JavaScript V8引擎，号称速度最快的LUA-Jit，以及众所周知的ActionScript。。。预先编译不仅能大幅提高运行速度，更重要的是能够提前发现脚本中显式的错误。</p>
+<p>　　</p>
+<p>　　但脚本中所谓的编译，和传统语言的编译，还是很大区别的。脚本的编译，不过是代码上的深度优化，很快就可以完成。相比复杂了多的C++来说，似乎是望尘莫及的。提到C++的编译速度，大家的映象莫过于在VC里按下F5之后，看着输出框内一条一条的“Compiling...”缓缓出现。有时仅仅测试一个微小的修改，也要等上好几秒的时间。缓慢的编译速度备受煎熬，以至于简单的程序往往选择VB或C#这样可以快速调试的语言。</p>
+<p>　　</p>
+<p>　　对于庞大的MFC程序来说，缓慢的编译是理所当然的。但简单的小程序出现过长的编译时间，那一定是头文件引用的不合理了。事实上，使用预处理头文件的小程序，编译仅仅是一瞬间的，之后的各种停顿往往是IDE引起的。</p>
+<p>　　</p>
+<p>　　那么我们就来测试下，不用IDE，仅用纯命令编译个C++小程序。我们使用VC6.0的编译器：CL.exe</p>
+<p>　　为了确保纯净的编译环境，我们把CL.exe必须依赖的文件复制到新建的文件夹里。对于VC6的版本，只要有如下5个文件，就可以完成.cpp到.exe的编译了。</p>
+<blockquote>
+<p>CL.exe<br>　　C1XX.DLL<br>　　C2.DLL<br>　　MSPDB60.DLL<br>Link.exe</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+<p>　　打开cmd，设置好环境变量，对应到VC6的头目录和库目录</p>
+<blockquote>
+<p>SET INCLUDE=C:\Program Files (x86)\Microsoft Visual Studio\VC98\Include</p>
+<p>SET LIB=C:\Program Files (x86)\Microsoft Visual Studio\VC98\Lib</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+<p>　　就可以调用命令编译了：</p>
+<blockquote>
+<p><em>cl test.cpp</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+<p>　　一眨眼的工夫，编译和链接完成，生成了test.exe，一切正常。而这还是在没有使用预编译头的情况下编译的。</p>
+<p><img src="./EtherDream&#39;s Blog_files/2012072813122925.png" alt=""></p>
+<p>　　</p>
+<p>　　由此可见，即使语言本身很复杂，但只要用它写的代码不复杂，编译还是非常快的。</p>
+<p>　　仔细想想也应如此。以如今的硬件配置，运行98年的编译器，编译一个才几行代码的程序，自然是一瞬间的。</p>
+<p>　　命令行编译简单的C++程序是如此的快速，利用这个优势，继续我们的脚本探索。。。</p>
+<p>　　</p>
+<h1>运行环境</h1>
+<p>　　如果要写一个生成100个随机序列号的小程序，你会使用哪类语言？</p>
+<p>　　相比传统语言要先创建一个工程项目，我们直接在桌面新建个文本文件就可以写脚本了。</p>
+<p>　　虽然用文本编辑器写代码没任何优势，但对于简单的程序足矣。之后程序交给其他人使用时，脚本优势就淋漓尽致的体现出来了：当他们自己想简单修改一些逻辑规则时，只需用记事本打开就可以，而记事本每台电脑上都有。</p>
+<p>　　相反，传统语言写的程序，即使有源代码，用户想简单的修改下也无法生效，还需安装并配置好相应的开发环境才行，这对不熟悉的人来说颇费周折。</p>
+<p>　　</p>
+<p><strong>　　所以脚本必须足够简单 —— 简单到用户只管修改和运行就可以，其他步骤都交给脚本宿主自动完成。</strong></p>
+<p>　　</p>
+<p>　　如果想用C++写脚本，那么代码的编译和链接当然必须是全自动的，这并不复杂。</p>
+<p>　　但仅仅依靠CL.exe等几个命令还是不够的，因为在其他的电脑上并没有相应的开发环境 —— Include和Lib文件夹，因此就无法通过编译和链接了。</p>
+<p>　　而这些头文件库文件，一共多达上千个，全都带上则有近百兆！显然，我们的脚本只用到几个基本功能就可以了，那些复杂的windows头文件就没必要了。</p>
+<p>　　</p>
+<p>　　事实上，程序的头文件只是函数和结构的定义，仅仅用来给编译器分析而已，最终并不生成实际的指令。所以，我们把常用的头文件，事先生成一个<strong>.pch预编译头</strong>文件就可以。以后编译时，将他对应到某个头文件就可以了，例如stdafx.h。这样就无需使用任何头文件了。即使stdafx.h也不在，编译仍然能通过，因为这一切都打包在.pch里面了。并且大量的头文件经过事先的分析，编译时就无需再编译它们了，速度大幅提升。</p>
+<p>　　</p>
+<p>　　至于Lib文件，里面都是库函数的内容。除非整个程序不使用任何C运行时库，那么我们可以不带上任何lib，但那样只能写最基本的代码了。对于一般的简单脚本程序，只需几个必要的lib即可：<em>KERNEL32.LIB，LIBCMT.LIB，LIBCPMT.LIB，OLDNAMES.LIB</em>。总共才1M多。</p>
+<p>　　</p>
+<p>　　我们把这几个lib文件以及.pch文件，放在cl.exe同个目录下，这样就无需指定INCLUDE和LIB环境变量。</p>
+<p>　　<img src="./EtherDream&#39;s Blog_files/2012072900010669.png" alt=""></p>
+<p>　　</p>
+<p>　　至此，我们有了一个精简版的VC6编译器。通过上述10个文件，我们可以不依赖任何环境，独立编译C++程序了。</p>
+<blockquote>
+<p><em>cl /Yu"stdafx.h" /Fp"MyDLL.pch" test.cpp</em></p>
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+<h1>实际运行</h1>
+<p>　　现在，我们可以动态产生C++代码文件，并且自动编译的能力了。但是如何将最终的二进制文件与脚本宿主交互呢？</p>
+<p>　　由于exe只能运行在独立的进程里，数据交互只能通过匿名管道，要实现回调什么的非常困难。</p>
+<p>　　但若换成dll就可以大显身手了，不仅运行在同一进程空间内，更重要的是dll是可以动态加载卸载的，这一点太符合脚本程序的特性了。并且当某个模块更新了之后，就可以把先前的模块释放掉，加载最新的。而这一切都是动态的，无需重启宿主即可完成！</p>
+<p>　　而且dll可以导出内部的函数，宿主用GetProcAddress()就可以轻松获得某个函数地址；至于回调，传递一个宿主的函数指针给脚本就可以了。只要约定好函数声明，双方都可以用最简单原始的方法互相调用，甚至共享同一块内存空间。</p>
+<p>　　</p>
+<p>　　为了让函数导出更简洁，本例中定义了个叫<em>function</em>的宏：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">#define</span> function extern "C" __declspec(dllexport) void</pre>
+</div>
+<p>　　于是就可以简单的定义一个导出函数了：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">function</span><span style="color: #000000;"> Test()
+{
+      </span><span style="color: #008000;">//</span><span style="color: #008000;"> some code here</span>
+}</pre>
+</div>
+<p>　　是不是很有脚本的感觉呢：）</p>
+<p>　　</p>
+<h1>语法检查</h1>
+<p>　　一个用文本编辑器敲出来的代码，拼写错误是难免的。所以一个好的脚本引擎，会在运行前做一次全面的语法检查，事先排除明显的错误，而不是边解释边运行。</p>
+<p>　　C++就是将其做到了极限，不仅能查出致命的错误，甚至不规范的代码也会有警告提示。这是非常值得的，一个小bug浪费的时间，足够几万次编译了。</p>
+<p>　　想要在我们的C++脚本里实现这个功能，其实是非常简单的。因为在调用cl.exe编译时，要是有编译错误就会反馈出来。我们根据对应的错误行号，提示用户就可以了。</p>
+<p>　　</p>
+<p>　　<img src="./EtherDream&#39;s Blog_files/2012072813322413.png" alt=""></p>
+<hr>
+<p>　　<img src="./EtherDream&#39;s Blog_files/2012072812093572.png" alt=""></p>
+<h1>　<br>调试环境</h1>
+<p>　　一个强大的脚本引擎，往往带有调试器。虽然编译器能够预先排除一些错误，但是逻辑上的错误只有在运行时才能出现。</p>
+<p>　　对于简单的脚本程序，这项功能似乎不那么重要。毕竟在调试状态下运行，性能会有所影响。</p>
+<p>　　在C++脚本里，我们可以通过宏来扩展调试功能，决定是否输出调试信息。不过对于异常错误，处理就比较讲究了。</p>
+<p>　　由于我们最终运行的是二进制dll模块，这和普通的脚本有着天壤之别。dll模块是和宿主共用一个进程的，所以一旦当dll内异常触发时，整个进程包括宿主一块进入调试状态了（系统装有开发环境的话）。如果错误过于严重，会导致整个进程的崩溃。这是个非常值得注意的地方，也是C++作脚本在权限上的隐患。所以尽可能少用指针特性，使用更安全的代码，让代码风险降到最少。</p>
+<p>　　对于致命的错误，宿主记录下dump文件是非常重要的，方便调试。</p>
+<p>　　</p>
+<p>　　不过出于简单，本例的宿主是用VB写的，也就无法在调用前使用__try{}进行SEH捕捉。如果宿主也是C++实现的话，则尽可能捕捉dll内的异常。</p>
+<p>&nbsp;</p>
+<h1>开发环境</h1>
+<p>　　有别于脚本语言，C++本身就是用于大型程序的开发，所以开发环境是非常完善的。</p>
+<p>　　但作为一个脚本，往往都是单个的文本文件，而不是一个项目组。任何版本的VC编辑单个cpp文件，和编辑纯文本文件几乎没有区别。因此我们事先得建立一个模板项目，将需要编辑的cpp移到此项目内开发，这样才会有下拉框智能提示等功能。</p>
+<p>　　不过既然选择它作为脚本来使用，那就应该用来处理一些简单的，经常变更的逻辑事务。对于复杂的脚本程序，还不如直接写在宿主里面了。</p>
+<p>　　</p>
+<p>　　事实上，“程序”和“脚本”之间从没一条固定的界限。用纯粹的程序也可以写一个复杂的游戏故事情节，用纯粹的脚本也可以开发一个大型项目。只不过太过死板，或太过灵活，都会增加额外的工作量。</p>
+<p>&nbsp;</p>
+<h1>总结</h1>
+<p>　　与其称之为C++脚本，倒不如说是插件———可以根据需求，动态产生指令的插件。</p>
+<p>　　虽然可以玩转出一些脚本的特征，然而C++终究是门严格的语言。相比脚本的灵活性，C++固然更为严谨和死板。当然，凭借强大的宏、模版、运算符重载，我们可以充分扩展，为脚本提供丰富多样的特征和语法糖。</p>
+<p>　　当然，它的优势也是显而易见的：性能超高，交互简单。并且完全支持C++的特性。</p>
+<p>　　<img src="./EtherDream&#39;s Blog_files/2012072900305259.png" alt=""></p>
+<p>　　</p>
+<p>　　事实上，不仅仅是C++，任何一门高级语言都可以当“脚本”使用，只要调用它们的编译器即可。如果喜欢C#，或者Java风格，只需稍作修改就可以。</p>
+<hr>
+<p>&nbsp;</p>
+<p>　　为了简单演示，本例使用ＶＢ写了个简单的宿主程序，包括基本的编译，链接，加载，语法检查功能。</p>
+<p>　　宿主提供了一个叫“Console”的接口，可以输出字符串。要实现更多接口和扩展功能，修改cl文件夹内的T.h即可。</p>
+<p>　　</p>
+<p>　　源码可以在这里下载：<a href="http://files.cnblogs.com/index-html/CppScript.rar">http://files.cnblogs.com/index-html/CppScript.rar</a></p>
+<p>　　</p>
+<p>　　其中有一个DLLTmpl的工程，没有任何用处，仅仅为了生成一个.pch预编译头文件而已。如果想在脚本里使用更多的头文件，就得在StdAfx.h内添加。编译之后的release/MyDll.pch复制到cl文件夹，覆盖原有的即可。</p>
+<p>&nbsp;</p>
+<hr>
+<p>后记：</p>
+<p>&nbsp; &nbsp; 当初写这篇文章，是优化了一个防火墙数据包过滤系统的心得。</p>
+<p>&nbsp; &nbsp; 因为数据包数量非常大，如果每次都通过传统的脚本判断，性能开销较大；如果写在 DLL 之类的模块里，虽然性能很高，但每次修改规则都得重新发布一次，很麻烦。</p>
+<p>&nbsp; &nbsp; 所以最后把规则写成纯文本的 C++ 代码，程序启动时自动将其编译成 DLL，中途代码若有修改，也可以热更新。这样性能和配置都可兼得。</p>
+<p>&nbsp; &nbsp; 当然，有条件的话做成 JIT 系统是最好的，例如 winpcap 过滤器那种。不过出于成本，直接调编译器是最简单的。而且套用现成的语言，学习成本也很小。</p>
+<p>&nbsp; &nbsp; （后来 C++0x 出来了，有一个 auto 关键字，可以类型自动推断。所以还可以 #define var auto，那样就更像 javascript 脚本了：）</p>
+<p>&nbsp; &nbsp; 最近网上看到篇文章 <a href="http://www.douban.com/note/269134835/" target="_blank">《什么是“脚本语言”》</a>，终于把之前想说的都说出来了，所以特来更新下。（2015/06/26）</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/index-html/category/286088.html">天真代码</a></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(2613012,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;56daa958-3138-e011-ac81-842b2b196315&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./EtherDream&#39;s Blog_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./EtherDream&#39;s Blog_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/index-html/" target="_blank"><img src="./EtherDream&#39;s Blog_files/u273626.bmp" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/index-html/">EtherDream</a><br>
+            <a href="http://home.cnblogs.com/u/index-html/followees">关注 - 27</a><br>
+            <a href="http://home.cnblogs.com/u/index-html/followers">粉丝 - 1367</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor">荣誉：<a href="http://www.cnblogs.com/expert/" target="_blank">推荐博客</a></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;56daa958-3138-e011-ac81-842b2b196315&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(2613012,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">7</span>
+    </div>
+    <div class="buryit" onclick="votePost(2613012,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/index-html/archive/2012/07/18/js_select.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/index-html/archive/2012/07/18/js_select.html" title="发布于2012-07-18 09:13">利用函数模板技术，写一个简单高效的 JSON 查询器</a><br><a href="http://www.cnblogs.com/index-html/archive/2012/08/06/2625634.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/index-html/archive/2012/08/06/2625634.html" title="发布于2012-08-06 19:18">停电后，JavaScript定时器居然变慢了~</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2012-07-28 12:45</span> <a href="http://www.cnblogs.com/index-html/">EtherDream</a> 阅读(<span id="post_view_count">11321</span>) 评论(<span id="post_comment_count">21</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=2613012" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#" onclick="AddToWz(2613012);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=83633,cb_entryId=2613012,cb_blogApp=currentBlogApp,cb_blogUserGuid='56daa958-3138-e011-ac81-842b2b196315',cb_entryCreatedDate='2012/7/28 12:45:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<!--done-->
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems"></div>
+	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2436527" class="layer">#1楼</a><a name="2436527" id="comment_anchor_2436527"></a>  <span class="comment_date">2012-07-28 13:40</span> <a id="a_comment_author_2436527" href="http://www.cnblogs.com/tim-li/" target="_blank">TimeLangoliers</a> <a href="http://msg.cnblogs.com/send/TimeLangoliers" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2436527" class="blog_comment_body">闲着蛋疼才这么用- -</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2436527,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2436527,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2436530" class="layer">#2楼</a><a name="2436530" id="comment_anchor_2436530"></a>  <span class="comment_date">2012-07-28 13:48</span> <a id="a_comment_author_2436530" href="http://www.cnblogs.com/afxcn/" target="_blank">黄尚</a> <a href="http://msg.cnblogs.com/send/%E9%BB%84%E5%B0%9A" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2436530" class="blog_comment_body">不错</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2436530,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2436530,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2436535" class="layer">#3楼</a><a name="2436535" id="comment_anchor_2436535"></a>  <span class="comment_date">2012-07-28 13:59</span> <a id="a_comment_author_2436535" href="http://www.cnblogs.com/hun_dan/" target="_blank">王大湿</a> <a href="http://msg.cnblogs.com/send/%E7%8E%8B%E5%A4%A7%E6%B9%BF" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2436535" class="blog_comment_body">巫妖30技能</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2436535,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2436535,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2436535_avatar" style="display:none;">http://pic.cnblogs.com/face/u61297.jpg</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2436540" class="layer">#4楼</a><a name="2436540" id="comment_anchor_2436540"></a>  <span class="comment_date">2012-07-28 14:06</span> <a id="a_comment_author_2436540" href="http://www.cnblogs.com/wulaixiongmao/" target="_blank">无赖熊猫</a> <a href="http://msg.cnblogs.com/send/%E6%97%A0%E8%B5%96%E7%86%8A%E7%8C%AB" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2436540" class="blog_comment_body">列还 做别人不能做</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2436540,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2436540,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2436540_avatar" style="display:none;">http://pic.cnblogs.com/face/u393051.jpg?id=29095305</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2436546" class="layer">#5楼</a><a name="2436546" id="comment_anchor_2436546"></a>  <span class="comment_date">2012-07-28 14:12</span> <a id="a_comment_author_2436546" href="http://www.cnblogs.com/dataexcel/" target="_blank">dataexcel</a> <a href="http://msg.cnblogs.com/send/dataexcel" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2436546" class="blog_comment_body">下载chrome的源码。光TM的编译就得十来个小时。几十个G。真TM的蛋疼。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2436546,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2436546,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2436546_avatar" style="display:none;">http://pic.cnblogs.com/face/349231/20130205103426.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2436559" class="layer">#6楼</a><a name="2436559" id="comment_anchor_2436559"></a>  <span class="comment_date">2012-07-28 14:44</span> <a id="a_comment_author_2436559" href="http://www.cnblogs.com/Lvkun/" target="_blank">lvkun</a> <a href="http://msg.cnblogs.com/send/lvkun" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2436559" class="blog_comment_body">需要每个人机器上面都有C++编译环境啊</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2436559,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2436559,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2436628" class="layer">#7楼</a><a name="2436628" id="comment_anchor_2436628"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2012-07-28 16:37</span> <a id="a_comment_author_2436628" href="http://www.cnblogs.com/index-html/" target="_blank">EtherDream</a> <a href="http://msg.cnblogs.com/send/EtherDream" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2436628" class="blog_comment_body"><a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2436559" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2436559);">@</a>
+lvkun<br>不需要</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2436628,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2436628,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2436628_avatar" style="display:none;">http://pic.cnblogs.com/face/u273626.bmp</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2436667" class="layer">#8楼</a><a name="2436667" id="comment_anchor_2436667"></a>  <span class="comment_date">2012-07-28 17:54</span> <a id="a_comment_author_2436667" href="http://www.cnblogs.com/alax/" target="_blank">越笨越爱</a> <a href="http://msg.cnblogs.com/send/%E8%B6%8A%E7%AC%A8%E8%B6%8A%E7%88%B1" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2436667" class="blog_comment_body">呃，蛋有点疼</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2436667,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2436667,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2436670" class="layer">#9楼</a><a name="2436670" id="comment_anchor_2436670"></a>  <span class="comment_date">2012-07-28 17:58</span> <a id="a_comment_author_2436670" href="http://www.cnblogs.com/qswang/" target="_blank">chncwang</a> <a href="http://msg.cnblogs.com/send/chncwang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2436670" class="blog_comment_body">这还真不知道……</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2436670,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2436670,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2436670_avatar" style="display:none;">http://pic.cnblogs.com/face/u377370.jpg?id=20213800</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2436676" class="layer">#10楼</a><a name="2436676" id="comment_anchor_2436676"></a>  <span class="comment_date">2012-07-28 18:21</span> <a id="a_comment_author_2436676" href="http://www.cnblogs.com/irons/" target="_blank">irons</a> <a href="http://msg.cnblogs.com/send/irons" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2436676" class="blog_comment_body">看完了～～～～投机取巧啊。博主。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2436676,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2436676,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2436796" class="layer">#11楼</a><a name="2436796" id="comment_anchor_2436796"></a>  <span class="comment_date">2012-07-29 07:35</span> <a id="a_comment_author_2436796" href="http://home.cnblogs.com/u/432267/" target="_blank">OpenEIM</a> <a href="http://msg.cnblogs.com/send/OpenEIM" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2436796" class="blog_comment_body">哈哈，这个确实好玩。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2436796,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2436796,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2436879" class="layer">#12楼</a><a name="2436879" id="comment_anchor_2436879"></a>  <span class="comment_date">2012-07-29 11:27</span> <a id="a_comment_author_2436879" href="http://www.cnblogs.com/xspace/" target="_blank">对镜弹箜篌</a> <a href="http://msg.cnblogs.com/send/%E5%AF%B9%E9%95%9C%E5%BC%B9%E7%AE%9C%E7%AF%8C" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2436879" class="blog_comment_body">支持C++语法脚本满大街都是，比如 fastscript</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2436879,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2436879,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2436879_avatar" style="display:none;">http://pic.cnblogs.com/face/u161673.png?id=01170054</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2437193" class="layer">#13楼</a><a name="2437193" id="comment_anchor_2437193"></a>  <span class="comment_date">2012-07-30 08:46</span> <a id="a_comment_author_2437193" href="http://www.cnblogs.com/zhuangzhuang1988/" target="_blank">zhuangzhuang1988</a> <a href="http://msg.cnblogs.com/send/zhuangzhuang1988" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2437193" class="blog_comment_body">挺好玩的</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2437193,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2437193,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2437193_avatar" style="display:none;">http://pic.cnblogs.com/face/u148660.jpg?id=27131806</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2437318" class="layer">#14楼</a><a name="2437318" id="comment_anchor_2437318"></a>  <span class="comment_date">2012-07-30 10:42</span> <a id="a_comment_author_2437318" href="http://home.cnblogs.com/u/77961/" target="_blank">山坡上的牧羊人</a> <a href="http://msg.cnblogs.com/send/%E5%B1%B1%E5%9D%A1%E4%B8%8A%E7%9A%84%E7%89%A7%E7%BE%8A%E4%BA%BA" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2437318" class="blog_comment_body">加上行号的话会不会更易用一些?</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2437318,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2437318,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2437420" class="layer">#15楼</a><a name="2437420" id="comment_anchor_2437420"></a>  <span class="comment_date">2012-07-30 12:21</span> <a id="a_comment_author_2437420" href="http://www.cnblogs.com/aoaoblogs/" target="_blank">嗷嗷</a> <a href="http://msg.cnblogs.com/send/%E5%97%B7%E5%97%B7" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2437420" class="blog_comment_body">又见void main</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2437420,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2437420,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2437420_avatar" style="display:none;">http://pic.cnblogs.com/face/u98064.jpg?id=20202545</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2684002" class="layer">#16楼</a><a name="2684002" id="comment_anchor_2684002"></a>  <span class="comment_date">2013-05-18 19:39</span> <a id="a_comment_author_2684002" href="http://home.cnblogs.com/u/192152/" target="_blank">deve.huang</a> <a href="http://msg.cnblogs.com/send/deve.huang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2684002" class="blog_comment_body">要是能完全实现了，那很多AS3的程序员，开发手机等项目就方便多了（C++）</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2684002,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2684002,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#2705599" class="layer">#17楼</a><a name="2705599" id="comment_anchor_2705599"></a>  <span class="comment_date">2013-06-15 19:21</span> <a id="a_comment_author_2705599" href="http://www.cnblogs.com/bigbigHD/" target="_blank">硬盘很大</a> <a href="http://msg.cnblogs.com/send/%E7%A1%AC%E7%9B%98%E5%BE%88%E5%A4%A7" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2705599" class="blog_comment_body">好像其他脚本语言强大之处在于类库非常多，一个命令下去 ，抵得上若干C++行。<br><br>C++当成脚本这样。。<br>想法不错。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2705599,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2705599,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#3210132" class="layer">#18楼</a><a name="3210132" id="comment_anchor_3210132"></a>  <span class="comment_date">2015-06-17 12:11</span> <a id="a_comment_author_3210132" href="http://home.cnblogs.com/u/775488/" target="_blank">tallplay</a> <a href="http://msg.cnblogs.com/send/tallplay" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3210132" class="blog_comment_body">/Yu"stdafx.h"  應該可以省略</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3210132,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3210132,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#3229982" class="layer">#19楼</a><a name="3229982" id="comment_anchor_3229982"></a>  <span class="comment_date">2015-07-17 15:26</span> <a id="a_comment_author_3229982" href="http://www.cnblogs.com/wjx0912/" target="_blank">拥剑公子</a> <a href="http://msg.cnblogs.com/send/%E6%8B%A5%E5%89%91%E5%85%AC%E5%AD%90" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3229982" class="blog_comment_body">很好的想法。学习了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3229982,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3229982,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#3243879" class="layer">#20楼</a><a name="3243879" id="comment_anchor_3243879"></a>  <span class="comment_date">2015-08-08 10:04</span> <a id="a_comment_author_3243879" href="http://home.cnblogs.com/u/790103/" target="_blank">Forrest_zhu</a> <a href="http://msg.cnblogs.com/send/Forrest_zhu" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3243879" class="blog_comment_body">楼主太强了，求C++实现呀，VB没学过。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3243879,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3243879,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#3250994" class="layer">#21楼</a><a name="3250994" id="comment_anchor_3250994"></a><span id="comment-maxId" style="display:none;">3250994</span><span id="comment-maxDate" style="display:none;">2015/8/20 16:32:24</span>  <span class="comment_date">2015-08-20 16:32</span> <a id="a_comment_author_3250994" href="http://home.cnblogs.com/u/790103/" target="_blank">Forrest_zhu</a> <a href="http://msg.cnblogs.com/send/Forrest_zhu" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3250994" class="blog_comment_body">楼主请问如何实现对C++函数参数如指针、结构体的传入呀？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3250994,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3250994,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/index-html/archive/2012/07/28/cppscript.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://group.cnblogs.com/topic/75351.html" target="_blank">【活动】硅谷IT教育平台Udacity邀请您来免费上课</a><br><a href="http://www.rongcloud.cn/live" target="_blank">【推荐】移动直播百强八成都在用融云即时通讯云</a><br><a href="http://www.gcpowertools.com.cn/products/activereports_overview.htm?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=AR&amp;utm_campaign=community" target="_blank">【推荐】报表开发有捷径：快速设计轻松集成，数据可视化和交互</a><br><a href="http://netease.im/?&amp;hmsr=bky8&amp;from=bky8" target="_blank">【推荐】网易云信-一天开发一个微信，独创1对1技术顾问让开发加速</a><br></div>
+<div id="opt_under_post"></div>
+<div id="ad_c1" class="c_ad_block"><a href="http://gold.xitu.io/extension/?utm_source=cnblogs&amp;utm_medium=banner&amp;utm_content=juhe&amp;utm_campaign=q3_extension" target="_blank"><img width="300" height="250" src="./EtherDream&#39;s Blog_files/24442-20160902193613668-1123982956.png" alt=""></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/553489/" target="_blank">唯品会启用微软智能云和大数据平台 为2亿会员打造个性化购物体验</a><br> ·  <a href="http://news.cnblogs.com/n/553488/" target="_blank">PHP 7.0.11 正式发布</a><br> ·  <a href="http://news.cnblogs.com/n/553487/" target="_blank">Adblock Plus开始卖广告</a><br> ·  <a href="http://news.cnblogs.com/n/553486/" target="_blank">YouTube真的要做社交了 正测试全新「社区」功能</a><br> ·  <a href="http://news.cnblogs.com/n/553485/" target="_blank">又是别人家的公司！来看看互联网公司中秋节月饼哪家强？</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="ad_c2" class="c_ad_block"><a href="https://www.jiguang.cn/devservice/?from=cnblogs01" target="_blank"><img width="468" height="60" src="./EtherDream&#39;s Blog_files/24442-20160803181056012-1919505484.jpg" alt=""></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/551422/" target="_blank">没那么难，谈CSS的设计模式</a><br> ·  <a href="http://kb.cnblogs.com/page/550625/" target="_blank">程序猿媳妇儿注意事项</a><br> ·  <a href="http://kb.cnblogs.com/page/540529/" target="_blank">可是姑娘，你为什么要编程呢？</a><br> ·  <a href="http://kb.cnblogs.com/page/549631/" target="_blank">知其所以然（以算法学习为例）</a><br> ·  <a href="http://kb.cnblogs.com/page/548394/" target="_blank">如何给变量取个简短且无歧义的名字</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+$(function () {
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);    
+});
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/index-html/">EtherDream</a><br>园龄：<a href="http://home.cnblogs.com/u/index-html/" title="入园时间：2011-02-14">5年7个月</a><br>荣誉：<a href="http://www.cnblogs.com/expert/">推荐博客</a><br>粉丝：<a href="http://home.cnblogs.com/u/index-html/followers/">1367</a><br>关注：<a href="http://home.cnblogs.com/u/index-html/followees/">27</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;56daa958-3138-e011-ac81-842b2b196315&#39;)">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2012/06/01&#39;);return false;">&lt;</a></td><td align="center">2012年7月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2012/08/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">24</td><td class="CalOtherMonthDay" align="center">25</td><td class="CalOtherMonthDay" align="center">26</td><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td></tr><tr><td class="CalWeekendDay" align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td align="center">6</td><td class="CalWeekendDay" align="center">7</td></tr><tr><td class="CalWeekendDay" align="center">8</td><td align="center">9</td><td align="center">10</td><td align="center">11</td><td align="center">12</td><td align="center">13</td><td class="CalWeekendDay" align="center">14</td></tr><tr><td class="CalWeekendDay" align="center">15</td><td align="center">16</td><td align="center">17</td><td align="center"><a href="http://www.cnblogs.com/index-html/archive/2012/07/18.html"><u>18</u></a></td><td align="center">19</td><td align="center">20</td><td class="CalWeekendDay" align="center">21</td></tr><tr><td class="CalWeekendDay" align="center">22</td><td align="center">23</td><td align="center">24</td><td align="center">25</td><td align="center">26</td><td align="center">27</td><td class="CalWeekendDay" align="center"><a href="http://www.cnblogs.com/index-html/archive/2012/07/28.html"><u>28</u></a></td></tr><tr><td class="CalWeekendDay" align="center">29</td><td align="center">30</td><td align="center">31</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/index-html/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/index-html/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/index-html/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/index-html/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/index-html/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_toptags" class="sidebar-block">
+<div class="catListTag">
+<h3 class="catListTitle">我的标签</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/index-html/tag/js/">js</a>(31)</li><li><a href="http://www.cnblogs.com/index-html/tag/creative/">creative</a>(10)</li><li><a href="http://www.cnblogs.com/index-html/tag/css/">css</a>(8)</li><li><a href="http://www.cnblogs.com/index-html/tag/algorithm/">algorithm</a>(5)</li><li><a href="http://www.cnblogs.com/index-html/tag/css3/">css3</a>(4)</li><li><a href="http://www.cnblogs.com/index-html/tag/html/">html</a>(4)</li><li><a href="http://www.cnblogs.com/index-html/tag/optimize/">optimize</a>(3)</li><li><a href="http://www.cnblogs.com/index-html/tag/as/">as</a>(3)</li><li><a href="http://www.cnblogs.com/index-html/tag/bug/">bug</a>(2)</li><li><a href="http://www.cnblogs.com/index-html/tag/codec/">codec</a>(2)</li><li><a href="http://www.cnblogs.com/index-html/tag/">更多</a></li>
+</ul>
+</div></div><div id="sidebar_categories">
+<div class="catListPostCategory">
+<h3 class="catListTitle">随笔分类</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/index-html/category/286070.html">简单脚本(65)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/index-html/category/286088.html">天真代码(8)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/index-html/category/286087.html">以太幻想(18)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListPostArchive">
+<h3 class="catListTitle">随笔档案</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/index-html/archive/2016/09.html">2016年9月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="http://www.cnblogs.com/index-html/archive/2016/07.html">2016年7月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="http://www.cnblogs.com/index-html/archive/2016/06.html">2016年6月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="http://www.cnblogs.com/index-html/archive/2016/03.html">2016年3月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="http://www.cnblogs.com/index-html/archive/2016/01.html">2016年1月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="http://www.cnblogs.com/index-html/archive/2015/12.html">2015年12月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="http://www.cnblogs.com/index-html/archive/2015/11.html">2015年11月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_7" href="http://www.cnblogs.com/index-html/archive/2015/08.html">2015年8月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_8" href="http://www.cnblogs.com/index-html/archive/2015/06.html">2015年6月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_9" href="http://www.cnblogs.com/index-html/archive/2015/05.html">2015年5月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_10" href="http://www.cnblogs.com/index-html/archive/2015/04.html">2015年4月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_11" href="http://www.cnblogs.com/index-html/archive/2015/03.html">2015年3月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_12" href="http://www.cnblogs.com/index-html/archive/2015/02.html">2015年2月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_13" href="http://www.cnblogs.com/index-html/archive/2015/01.html">2015年1月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_14" href="http://www.cnblogs.com/index-html/archive/2014/11.html">2014年11月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_15" href="http://www.cnblogs.com/index-html/archive/2014/10.html">2014年10月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_16" href="http://www.cnblogs.com/index-html/archive/2014/09.html">2014年9月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_17" href="http://www.cnblogs.com/index-html/archive/2014/07.html">2014年7月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_18" href="http://www.cnblogs.com/index-html/archive/2013/07.html">2013年7月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_19" href="http://www.cnblogs.com/index-html/archive/2013/06.html">2013年6月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_20" href="http://www.cnblogs.com/index-html/archive/2013/05.html">2013年5月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_21" href="http://www.cnblogs.com/index-html/archive/2013/04.html">2013年4月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_22" href="http://www.cnblogs.com/index-html/archive/2013/03.html">2013年3月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_23" href="http://www.cnblogs.com/index-html/archive/2013/01.html">2013年1月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_24" href="http://www.cnblogs.com/index-html/archive/2012/12.html">2012年12月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_25" href="http://www.cnblogs.com/index-html/archive/2012/08.html">2012年8月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_26" href="http://www.cnblogs.com/index-html/archive/2012/07.html">2012年7月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_27" href="http://www.cnblogs.com/index-html/archive/2012/06.html">2012年6月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_28" href="http://www.cnblogs.com/index-html/archive/2012/05.html">2012年5月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_29" href="http://www.cnblogs.com/index-html/archive/2012/03.html">2012年3月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_30" href="http://www.cnblogs.com/index-html/archive/2011/12.html">2011年12月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_31" href="http://www.cnblogs.com/index-html/archive/2011/11.html">2011年11月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_32" href="http://www.cnblogs.com/index-html/archive/2011/10.html">2011年10月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_33" href="http://www.cnblogs.com/index-html/archive/2011/09.html">2011年9月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_34" href="http://www.cnblogs.com/index-html/archive/2011/04.html">2011年4月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_35" href="http://www.cnblogs.com/index-html/archive/2011/03.html">2011年3月 (18)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListImageCategory">
+<h3 class="catListTitle">相册</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_2_Link_0" href="http://www.cnblogs.com/index-html/gallery/287326.html" rel="nofollow">demo</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/index-html/p/mitm-cookie-crack.html#3507807">1. Re:中间人攻击 -- Cookie 喷发</a></li>
+        <li class="recent_comment_body">Drops虽然关闭了。但是可以投稿到安全客，作者有兴趣可以登录我们网站或者发送邮件给我。。。<a href="" target="_blank"></a>，邮箱：linwei#360.cn</li>
+        <li class="recent_comment_author">--cnhacks</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/index-html/p/mitm-cookie-crack.html#3507504">2. Re:中间人攻击 -- Cookie 喷发</a></li>
+        <li class="recent_comment_body">之前在乌云知识库上还保存了大神的这篇文章,结果乌云整改了...</li>
+        <li class="recent_comment_author">--有价值炮灰</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/index-html/p/using_c_in_javascript.html#3507450">3. Re:【探索】在 JavaScript 中使用 C 程序</a></li>
+        <li class="recent_comment_body">@abc9566根据 C 的函数名找到对应的 JS 函数逻辑。前提是 C 函数里没用到运行时，或者其他特殊功能，否则得把辅助功能也带上。还有如果 C 用到全局变量的话，得把 “ /* memory i......</li>
+        <li class="recent_comment_author">--EtherDream</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/index-html/p/using_c_in_javascript.html#3507325">4. Re:【探索】在 JavaScript 中使用 C 程序</a></li>
+        <li class="recent_comment_body">我遇到跟你一样的问题，你在EMSCRIPTEN生成的巨量asm.js代码中，如何提取C逻辑代码，你上面说过滤掉运行时代码，剩下是100%逻辑代码，但问题是，哪些是要过滤掉的运行时代码？</li>
+        <li class="recent_comment_author">--abc9566</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/index-html/p/mitm-cookie-sniffer.html#3505133">5. Re:【流量劫持】沉默中的狂怒 —— Cookie 大喷发</a></li>
+        <li class="recent_comment_body">讲道理，这篇文章唯一的思路就是前台那段js把域名放到script里面去请求。然后劫持的后台从header 里面取出来cookie。后台可以用任何抓包软件都可以，前台可以吧那段Js做成xss脚本。可以达......</li>
+        <li class="recent_comment_author">--Object0225</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/index-html/p/cable_attack.html">1. 【趣事】一根网线发起的攻击(54684)</a></li><li><a href="http://www.cnblogs.com/index-html/p/wifi_hijack_3.html">2. WiFi流量劫持—— JS脚本缓存投毒(24700)</a></li><li><a href="http://www.cnblogs.com/index-html/p/captcha-trap.html">3. 【探索】自动报警的验证码(16266)</a></li><li><a href="http://www.cnblogs.com/index-html/archive/2013/06/14/wifi_hijack_2.html">4. WiFi流量劫持—— 浏览任意页面即可中毒！(14835)</a></li><li><a href="http://www.cnblogs.com/index-html/p/ssl-frontend-hijack.html">5. 【流量劫持】SSLStrip 的未来 —— HTTPS 前端劫持(14795)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/index-html/p/cable_attack.html">1. 【趣事】一根网线发起的攻击(253)</a></li><li><a href="http://www.cnblogs.com/index-html/archive/2011/12/31/js_battlecity.html">2. 【分享】曾经做的一个JS小游戏——《Battle City》(85)</a></li><li><a href="http://www.cnblogs.com/index-html/p/captcha-trap.html">3. 【探索】自动报警的验证码(65)</a></li><li><a href="http://www.cnblogs.com/index-html/p/wifi_hijack_3.html">4. WiFi流量劫持—— JS脚本缓存投毒(52)</a></li><li><a href="http://www.cnblogs.com/index-html/p/mitm-cookie-sniffer.html">5. 【流量劫持】沉默中的狂怒 —— Cookie 大喷发(47)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/index-html/p/cable_attack.html">1. 【趣事】一根网线发起的攻击(356)</a></li><li><a href="http://www.cnblogs.com/index-html/p/cookie-dos.html">2. 超大 Cookie 拒绝服务攻击(75)</a></li><li><a href="http://www.cnblogs.com/index-html/p/captcha-trap.html">3. 【探索】自动报警的验证码(74)</a></li><li><a href="http://www.cnblogs.com/index-html/p/frontend-slow-hash.html">4. 对抗密码破解 —— Web 前端慢 Hash(52)</a></li><li><a href="http://www.cnblogs.com/index-html/p/wifi_hijack_3.html">5. WiFi流量劫持—— JS脚本缓存投毒(49)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2016 EtherDream
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+</body></html>

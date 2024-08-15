@@ -1,0 +1,49 @@
+数据访问规范开发工具包
+
+	服务器工具包
+		加密锁授权 
+		  型号	        I/O点数
+			DAS_LA_256	  256
+			DAS_LA_ 512	  512
+			DAS_LA_ MAX	  无限点
+		序列号激活授权	
+		  型号	        I/O点数
+		  DAS_SA_256	  256
+			DAS_SA_512	  512
+			DAS_SA_MAX	  无限点
+
+	客户端工具包
+		加密锁授权	
+		  型号					I/O点数
+      DAC_LA_MAX		无限点
+	序列号授权	
+		  型号					I/O点数
+			DAC_SA_MAX		无限点
+
+报警与事件规范开发工具包
+
+	服务器工具包
+		加密锁授权	
+		 	型号					I/O点数
+			AES_LA_256		256
+			AES_LA_512		512
+			AES_LA_MAX		无限点
+		序列号授权	
+		 	型号					I/O点数
+			AES_SA_256		256
+			AES_SA_512		512
+			AES_SA_MAX		无限点
+
+	客户端工具包
+		加密锁授权	
+			型号					I/O点数
+			AEC_LA_MAX		无限点
+		序列号授权	
+			型号					I/O点数
+			AEC_SA_MAX		无限点
+
+联系方式：
+  北京安捷尔软件技术有限公司
+	web: http://www.agilewill.com
+	email: sales@agilewill.com, supports@agilewill.com
+	电话：(010)86274817, 13381058970

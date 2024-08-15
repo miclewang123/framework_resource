@@ -1,0 +1,21 @@
+var msword = ScriptHost.CreateActiveX("Word.Basic");
+msword.appshow();
+msword.filenew();
+msword.Insert( "hello");
+
+--
+
+var strComputer = "." ;
+function EnumNameSpaces(strNameSpace)
+{
+    ScriptHost.Display( strNameSpace)
+    var objName = "winmgmts:\\" + strComputer + "\\" + strNameSpace;
+   var objWMIService = ScriptHost.CreateActiveX(objName);
+   var colNameSpaces = objWMIService.InstancesOf("__NAMESPACE");
+   for( objNameSpace in colNameSpaces)
+   {
+        var nnName = strNameSpace + "\" + objNameSpace.Name;
+        EnumNameSpaces( nnName );
+  }
+}
+EnumNameSpaces("root");

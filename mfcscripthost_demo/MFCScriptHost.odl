@@ -1,0 +1,67 @@
+// MFCScriptHost.odl : type library source for MFCScriptHost.exe
+
+// This file will be processed by the MIDL compiler to produce the
+// type library (MFCScriptHost.tlb).
+
+[ uuid(E662E9C0-01DB-4A0C-9AF9-06F8FFB7ACBE), version(1.0) ]
+library MFCScriptHost
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+
+	//  Primary dispatch interface for CHost_Proxy
+	
+	[ uuid(BC810D88-1564-46CF-960A-6BD3653E91D7) ]
+	dispinterface IHost_Proxy
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CHost_Proxy)
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CHost_Proxy)
+			[id(1)] IDispatch* CreateActiveX(BSTR szProgID);
+			[id(2)] void QuitApp();
+			[id(3)] void Display(BSTR strMessage);
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Primary dispatch interface for HostEvent
+	
+	[ uuid(740C1C2D-692F-43F8-85FF-38DEE1742819) ]
+	dispinterface IHostEvent
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(HostEvent)
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(HostEvent)
+			[id(1)] void OnRun();
+			[id(2)] void OnAppExit();
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Class information for CHost_Proxy
+	
+	[ uuid(F8235A29-C576-439D-A070-6E7980C9C3F6) ]
+	coclass Host_Proxy
+	{
+		[default] dispinterface IHost_Proxy;
+		[default, source] dispinterface IHostEvent;
+	};
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};
